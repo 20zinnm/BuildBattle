@@ -7,7 +7,11 @@ import org.bukkit.entity.Player;
 
 import com.worldcretornica.plotme_core.Plot;
 
+import me.meyerzinn.buildbattle.stages.JoiningStage;
+import me.meyerzinn.buildbattle.stages.PregameStage;
+import me.meyerzinn.buildbattle.stages.Stage;
 import me.meyerzinn.buildbattle.status.AddPlayerStatus;
+import me.meyerzinn.buildbattle.status.GameStatus;
 
 /**
  * The main object that runs the show.
@@ -16,6 +20,8 @@ import me.meyerzinn.buildbattle.status.AddPlayerStatus;
  */
 public class Game {
 
+	private BuildBattle plugin;
+	
 	/*
 	 * DEFINE RUNTIME VARIABLES
 	 */
@@ -23,8 +29,13 @@ public class Game {
 	private World world;
 	private Long timeStarted;
 	private GameStatus gameStatus;
+	public void setGameStatus(GameStatus gameStatus) {
+		this.gameStatus = gameStatus;
+	}
 	private GameConfig gameConfig;
 	private TreeMap<Player, Plot> players = new TreeMap<Player, Plot>();
+	private Stage stage;
+	
 
 	/*
 	 * Get the game going.
@@ -32,9 +43,12 @@ public class Game {
 
 	public Game(BuildBattle plugin, World world, int timeLimit, int playerLimit, int joinTime, String theme,
 			int judgingTime) {
+		this.plugin = plugin;
+		
 		this.world = world;
 		this.timeStarted = System.currentTimeMillis();
 		this.gameConfig = new GameConfig(timeLimit, playerLimit, joinTime, theme, judgingTime);
+		this.setStage(new PregameStage().beginStage(this));
 	}
 
 	/*
@@ -46,6 +60,22 @@ public class Game {
 		 * Figure out the next section and initialize it. That section will
 		 * replace the gameState, etc.
 		 */
+		switch (this.gameStatus) {
+		case PREGAME:
+			this.setStage(new JoiningStage().beginStage(this));
+			break;
+		case JOINING:
+			
+			break;
+		case BUILDING:
+			break;
+		case JUDGING:
+			break;
+		case POSTGAME:
+			break;
+		default:
+			break;
+		}
 	}
 
 	/**
@@ -74,6 +104,7 @@ public class Game {
 	 * @return World The world this takes place in (or null if there is not
 	 *         one).
 	 */
+
 	public World getWorld() {
 		return world;
 	}
@@ -82,6 +113,7 @@ public class Game {
 	 * @return Long The system time in milliseconds the game started (or null if
 	 *         there is not one).
 	 */
+
 	public Long getTimeStarted() {
 		return this.timeStarted;
 	}
@@ -91,8 +123,36 @@ public class Game {
 	 * @return GameStatus The current status of the game (or null if there is
 	 *         not one).
 	 */
+
 	public GameStatus getGameStatus() {
 		return this.gameStatus;
+	}
+	
+	/**
+	 * 
+	 * @return Stage The current stage (or null if there is not one).
+	 */
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+	/**
+	 * 
+	 * @return BuildBattle The plugin registering the game.
+	 */
+	public BuildBattle getPlugin() {
+		return plugin;
+	}
+	
+	/**
+	 * 
+	 * @return GameConfig
+	 */
+	public GameConfig getGameConfig() {
+		return this.gameConfig;
 	}
 
 }
