@@ -1,5 +1,6 @@
 package me.meyerzinn.buildbattle;
 
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.bukkit.World;
@@ -7,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.worldcretornica.plotme_core.Plot;
 
+import me.meyerzinn.buildbattle.runnables.GameRunnable;
 import me.meyerzinn.buildbattle.stages.JoiningStage;
 import me.meyerzinn.buildbattle.stages.PregameStage;
 import me.meyerzinn.buildbattle.stages.Stage;
@@ -21,21 +23,18 @@ import me.meyerzinn.buildbattle.status.GameStatus;
 public class Game {
 
 	private BuildBattle plugin;
-	
+
 	/*
 	 * DEFINE RUNTIME VARIABLES
 	 */
 
 	private World world;
 	private Long timeStarted;
+	private Long currentTime;
 	private GameStatus gameStatus;
-	public void setGameStatus(GameStatus gameStatus) {
-		this.gameStatus = gameStatus;
-	}
 	private GameConfig gameConfig;
-	private TreeMap<Player, Plot> players = new TreeMap<Player, Plot>();
+	private TreeMap<Player, Plot> players;
 	private Stage stage;
-	
 
 	/*
 	 * Get the game going.
@@ -44,7 +43,8 @@ public class Game {
 	public Game(BuildBattle plugin, World world, int timeLimit, int playerLimit, int joinTime, String theme,
 			int judgingTime) {
 		this.plugin = plugin;
-		
+		this.players = new TreeMap<Player, Plot>();
+		new GameRunnable(this).runTaskTimerAsynchronously(plugin, 0, 5);
 		this.world = world;
 		this.timeStarted = System.currentTimeMillis();
 		this.gameConfig = new GameConfig(timeLimit, playerLimit, joinTime, theme, judgingTime);
@@ -65,7 +65,7 @@ public class Game {
 			this.setStage(new JoiningStage().beginStage(this));
 			break;
 		case JOINING:
-			
+
 			break;
 		case BUILDING:
 			break;
@@ -127,7 +127,7 @@ public class Game {
 	public GameStatus getGameStatus() {
 		return this.gameStatus;
 	}
-	
+
 	/**
 	 * 
 	 * @return Stage The current stage (or null if there is not one).
@@ -139,6 +139,7 @@ public class Game {
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
+
 	/**
 	 * 
 	 * @return BuildBattle The plugin registering the game.
@@ -146,7 +147,7 @@ public class Game {
 	public BuildBattle getPlugin() {
 		return plugin;
 	}
-	
+
 	/**
 	 * 
 	 * @return GameConfig
@@ -155,4 +156,19 @@ public class Game {
 		return this.gameConfig;
 	}
 
+	public void setGameStatus(GameStatus gameStatus) {
+		this.gameStatus = gameStatus;
+	}
+	public Set<Player> getPlayers()  {
+		return players.keySet();
+	}
+
+	public void setCurrentTime(Long currentTime) {
+		this.currentTime = currentTime;
+	}
+	
+	public Long getCurrentTime() {
+		return this.currentTime;
+	}
+	
 }

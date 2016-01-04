@@ -12,11 +12,21 @@
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
-            <id>WorldCretornica-repo</id>
-            <url>http://ci.worldcretornica.com/plugin/repository/everything/</url>
-        </repository>
+			<id>WorldCretornica-repo</id>
+			<url>http://ci.worldcretornica.com/plugin/repository/everything/</url>
+		</repository>
+		<repository>
+			<id>mvdw-software</id>
+			<name>MVdW Public Repositories</name>
+			<url>http://repo.mvdw-software.be/content/groups/public/</url>
+		</repository>
 	</repositories>
 	<dependencies>
+		<dependency>
+			<groupId>be.maximvdw</groupId>
+			<artifactId>MVdWPlaceholderAPI</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
@@ -24,11 +34,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-            <groupId>com.worldcretornica</groupId>
-            <artifactId>PlotMe-Core</artifactId>
-            <version>0.17.4-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
+			<groupId>com.worldcretornica</groupId>
+			<artifactId>PlotMe-Core</artifactId>
+			<version>0.17.4-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>
