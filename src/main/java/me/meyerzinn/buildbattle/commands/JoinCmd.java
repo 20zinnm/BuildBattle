@@ -6,8 +6,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.worldcretornica.plotme_core.Plot;
-import com.worldcretornica.plotme_core.api.IPlayer;
+import com.intellectualcrafters.plot.PS;
+import com.intellectualcrafters.plot.object.Plot;
+import com.intellectualcrafters.plot.object.PlotManager;
 
 import me.meyerzinn.buildbattle.BuildBattle;
 import net.md_5.bungee.api.ChatColor;
@@ -25,10 +26,14 @@ public class JoinCmd implements CommandExecutor {
 			if (player.hasPermission("buildbattle.join")) {
 				// AddPlayerStatus status = BuildBattle.game.addPlayer(player,
 				// plot)
-				IPlayer iplayer = BuildBattle.plotme.wrapPlayer(player);
-				Plot plot = BuildBattle.plotApi.getPlot(iplayer);
+				PlotManager plotManager = PS.get().getPlotManager(player.getWorld().getName());
+				Plot plot = PS.get().getPlot(player.getWorld().getName(),
+						plotManager.getPlotId(PS.get().getPlotWorld(player.getWorld().getName()),
+								(int) player.getLocation().getX(), (int) player.getLocation().getY(),
+								(int) player.getLocation().getZ()));
+				// Plot plot = PS.get().getPlot(player.getWorld(),);
 				if (plot != null) {
-					if (plot.getOwnerId() == player.getUniqueId()) {
+					if (plot.getOwners().contains(player.getUniqueId())) {
 						switch (BuildBattle.game.addPlayer(player, plot)) {
 						case ALREADY_JOINED:
 							player.sendMessage(ChatColor.translateAlternateColorCodes('&',
@@ -53,10 +58,10 @@ public class JoinCmd implements CommandExecutor {
 						case OK:
 							player.sendMessage(ChatColor.translateAlternateColorCodes('&',
 									plugin.getConfig().getString("lang.joined").replace("%plot",
-											plot.getId().getX() + ":" + plot.getId().getZ())));
+											plot.getId().x + ":" + plot.getId().y)));
 							Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
 									plugin.getConfig().getString("lang.joined-broadcast")
-											.replace("%plot", plot.getId().getX() + ":" + plot.getId().getZ())
+											.replace("%plot", plot.getId().x + ":" + plot.getId().y)
 											.replace("%player%", player.getName())));
 							break;
 						default:

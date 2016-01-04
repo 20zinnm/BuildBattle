@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import com.worldcretornica.plotme_core.Plot;
+import com.intellectualcrafters.plot.object.Plot;
 
 import me.meyerzinn.buildbattle.runnables.GameRunnable;
 import me.meyerzinn.buildbattle.stages.JoiningStage;

@@ -12,10 +12,6 @@
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
-			<id>WorldCretornica-repo</id>
-			<url>http://ci.worldcretornica.com/plugin/repository/everything/</url>
-		</repository>
-		<repository>
 			<id>mvdw-software</id>
 			<name>MVdW Public Repositories</name>
 			<url>http://repo.mvdw-software.be/content/groups/public/</url>
@@ -34,11 +30,9 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.worldcretornica</groupId>
-			<artifactId>PlotMe-Core</artifactId>
-			<version>0.17.4-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>provided</scope>
+			<groupId>com.intellectualcrafters</groupId>
+			<artifactId>PlotSquared</artifactId>
+			<version>3.2.24</version>
 		</dependency>
 	</dependencies>
 </project>
