@@ -96,6 +96,12 @@ public class Game {
 		if (players.size() >= gameConfig.getPlayerLimit()) {
 			return AddPlayerStatus.GAME_FULL;
 		}
+		if (players.containsKey(player)) {
+			return AddPlayerStatus.ALREADY_JOINED;
+		}
+		if (players.containsValue(plot)) {
+			return AddPlayerStatus.DUPLICATE_PLOT;
+		}
 		this.players.put(player, plot);
 		return AddPlayerStatus.OK;
 	}
@@ -159,16 +165,17 @@ public class Game {
 	public void setGameStatus(GameStatus gameStatus) {
 		this.gameStatus = gameStatus;
 	}
-	public Set<Player> getPlayers()  {
+
+	public Set<Player> getPlayers() {
 		return players.keySet();
 	}
 
 	public void setCurrentTime(Long currentTime) {
 		this.currentTime = currentTime;
 	}
-	
+
 	public Long getCurrentTime() {
 		return this.currentTime;
 	}
-	
+
 }

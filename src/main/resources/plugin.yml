@@ -1,0 +1,11 @@
+name: BuildBattle
+version: 0.0.1
+authors: ["AniSkywalker", "Willy"]
+main: me.meyerzinn.buildbattle.BuildBattle
+
+commands:
+  bbjoin:
+    description: Join the current build battle.
+  bbstart:
+    description: Start a new build battle.
+    usage: /<command> [params]

@@ -1,4 +1,13 @@
 lang:
   players-only: "&cOnly players can use this command!"
   no-permission: "&cYou don't have permission to do this!"
-  
+  not-owned: "&cYou must be standing on a plot you own!"
+  not-plot: "&cYou must be standing on a plot you own!"
+  already-joined: "&cYou are already in this build battle!"
+  # This should not happen because you can only enter one, and you must be the owner.
+  duplicate-plot: "&cThis plot is already entered!"
+  game-full: "&cThis game is full!"
+  in-progress: "&cThis game is in progress!"
+  no-game: "&cThere is no game to join!"
+  joined: "&aYou joined BuildBattle with plot &c%plot%&a!"
+  joined-broadcast: "&a%player% joined BuildBattle with plot &c%plot%&a!"
