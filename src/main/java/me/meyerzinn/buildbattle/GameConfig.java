@@ -1,27 +1,27 @@
 package me.meyerzinn.buildbattle;
 
 public class GameConfig {
-	
-	private int timeLimit;
+
+	private int buildingTime;
 	private int playerLimit;
 	private int joinTime;
 	private String theme;
 	private int judgingTime;
 
-	public GameConfig(int timeLimit, int playerLimit, int joinTime, String theme, int judgingTime) {
-		setTimeLimit(timeLimit);
+	public GameConfig(int buildingTime, int playerLimit, int joinTime, String theme, int judgingTime) {
+		setBuildingTime(buildingTime);
 		setPlayerLimit(playerLimit);
 		setJoinTime(joinTime);
 		setTheme(theme);
 		setJudgingTime(judgingTime);
 	}
 
-	public int getTimeLimit() {
-		return timeLimit;
+	public int getBuildingTime() {
+		return buildingTime;
 	}
 
-	public void setTimeLimit(int timeLimit) {
-		this.timeLimit = timeLimit;
+	public void setBuildingTime(int timeLimit) {
+		this.buildingTime = timeLimit;
 	}
 
 	public int getPlayerLimit() {

@@ -2,16 +2,20 @@ package me.meyerzinn.buildbattle;
 
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.UUID;
 
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import com.intellectualcrafters.plot.object.Plot;
+import com.intellectualcrafters.plot.util.MainUtil;
 
-import me.meyerzinn.buildbattle.runnables.GameRunnable;
+import me.meyerzinn.buildbattle.stages.BuildingStage;
 import me.meyerzinn.buildbattle.stages.JoiningStage;
+import me.meyerzinn.buildbattle.stages.JudgingStage;
+import me.meyerzinn.buildbattle.stages.PostgameStage;
 import me.meyerzinn.buildbattle.stages.PregameStage;
-import me.meyerzinn.buildbattle.stages.Stage;
 import me.meyerzinn.buildbattle.status.AddPlayerStatus;
 import me.meyerzinn.buildbattle.status.GameStatus;
 
@@ -29,26 +33,24 @@ public class Game {
 	 */
 
 	private World world;
-	private Long timeStarted;
-	private Long currentTime;
+	private Long timeStageStarted;
 	private GameStatus gameStatus;
 	private GameConfig gameConfig;
-	private TreeMap<Player, Plot> players;
-	private Stage stage;
+	private TreeMap<UUID, Plot> players;
 
 	/*
 	 * Get the game going.
 	 */
 
-	public Game(BuildBattle plugin, World world, int timeLimit, int playerLimit, int joinTime, String theme,
+	public Game(BuildBattle plugin, World world, int buildingLimit, int playerLimit, int joinTime, String theme,
 			int judgingTime) {
 		this.plugin = plugin;
-		this.players = new TreeMap<Player, Plot>();
-		new GameRunnable(this).runTaskTimerAsynchronously(plugin, 0, 5);
+		this.players = new TreeMap<UUID, Plot>();
 		this.world = world;
-		this.timeStarted = System.currentTimeMillis();
-		this.gameConfig = new GameConfig(timeLimit, playerLimit, joinTime, theme, judgingTime);
-		this.setStage(new PregameStage().beginStage(this));
+		this.timeStageStarted = System.currentTimeMillis();
+		this.gameConfig = new GameConfig(buildingLimit, playerLimit, joinTime, theme, judgingTime);
+		new PregameStage().beginStage(this);
+		// this.gameStatus = GameStatus.PREGAME;
 	}
 
 	/*
@@ -62,20 +64,21 @@ public class Game {
 		 */
 		switch (this.gameStatus) {
 		case PREGAME:
-			this.setStage(new JoiningStage().beginStage(this));
+			new JoiningStage().beginStage(this);
 			break;
 		case JOINING:
-
+			new BuildingStage().beginStage(this);
 			break;
 		case BUILDING:
+			new JudgingStage().beginStage(this);
 			break;
 		case JUDGING:
-			break;
-		case POSTGAME:
+			new PostgameStage().beginStage(this);
 			break;
 		default:
 			break;
 		}
+		this.timeStageStarted = System.currentTimeMillis();
 	}
 
 	/**
@@ -96,13 +99,18 @@ public class Game {
 		if (players.size() >= gameConfig.getPlayerLimit()) {
 			return AddPlayerStatus.GAME_FULL;
 		}
-		if (players.containsKey(player)) {
+		if (players.containsKey(player.getUniqueId())) {
 			return AddPlayerStatus.ALREADY_JOINED;
 		}
 		if (players.containsValue(plot)) {
 			return AddPlayerStatus.DUPLICATE_PLOT;
 		}
-		this.players.put(player, plot);
+		MainUtil.clear(plot, false, new Runnable() {
+			public void run() {
+			}
+		});
+		this.players.put(player.getUniqueId(), plot);
+		player.teleport((Location) plot.getHome().toBukkitLocation());
 		return AddPlayerStatus.OK;
 	}
 
@@ -121,7 +129,7 @@ public class Game {
 	 */
 
 	public Long getTimeStarted() {
-		return this.timeStarted;
+		return this.timeStageStarted;
 	}
 
 	/**
@@ -132,18 +140,6 @@ public class Game {
 
 	public GameStatus getGameStatus() {
 		return this.gameStatus;
-	}
-
-	/**
-	 * 
-	 * @return Stage The current stage (or null if there is not one).
-	 */
-	public Stage getStage() {
-		return stage;
-	}
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
 	}
 
 	/**
@@ -166,16 +162,8 @@ public class Game {
 		this.gameStatus = gameStatus;
 	}
 
-	public Set<Player> getPlayers() {
+	public Set<UUID> getPlayers() {
 		return players.keySet();
-	}
-
-	public void setCurrentTime(Long currentTime) {
-		this.currentTime = currentTime;
-	}
-
-	public Long getCurrentTime() {
-		return this.currentTime;
 	}
 
 }

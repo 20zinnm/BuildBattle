@@ -1,0 +1,16 @@
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/GameConfig.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/stages/PostgameStage.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/commands/JoinCmd.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/stages/PregameStage.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/stages/JoiningStage.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/stages/BuildingStage.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/listeners/Listeners.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/stages/Rating.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/stages/Stage.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/BuildBattle.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/Game.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/commands/StartCommand.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/status/GameStatus.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/stages/JudgingStage.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/status/AddPlayerStatus.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/utils/IconMenu.java

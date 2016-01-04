@@ -4,6 +4,6 @@ import me.meyerzinn.buildbattle.Game;
 
 public interface Stage {
 
-	public Stage beginStage(Game game);
+	public void beginStage(Game game);
 	
 }

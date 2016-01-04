@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import me.meyerzinn.buildbattle.BuildBattle;
 import me.meyerzinn.buildbattle.Game;
+import me.meyerzinn.buildbattle.status.GameStatus;
 import net.md_5.bungee.api.ChatColor;
 
 public class StartCommand implements CommandExecutor {
@@ -26,17 +27,19 @@ public class StartCommand implements CommandExecutor {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (player.hasPermission("buildbattle.start")) {
-				if (BuildBattle.game == null) {
+				if (BuildBattle.game == null || BuildBattle.game.getGameStatus() == GameStatus.NO_GAME) {
 					if (args.length == 5) {
 						World world = player.getWorld();
-						int timeLimit = Integer.valueOf(args[0]) * 1000;
 						int playerLimit = Integer.valueOf(args[1]);
 						int joinTime = Integer.valueOf(args[2]) * 1000;
 						String theme = args[3];
 						int judgingTime = Integer.valueOf(args[4]) * 1000;
-						BuildBattle.game = new Game(plugin, world, timeLimit, playerLimit, joinTime, theme,
+						int buildingTime = Integer.valueOf(args[0]) * 1000;
+						BuildBattle.game = new Game(plugin, world, buildingTime, playerLimit, joinTime, theme,
 								judgingTime);
 						player.sendMessage(ChatColor.GREEN + "Game started!");
+					} else {
+						player.sendMessage(ChatColor.RED + "Invalid arguments!");
 					}
 				} else {
 					// Already a game
@@ -51,7 +54,7 @@ public class StartCommand implements CommandExecutor {
 			// Not player
 			sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
 		}
-		return false;
+		return true;
 	}
 
 }

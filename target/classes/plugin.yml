@@ -2,7 +2,7 @@ name: BuildBattle
 version: 0.0.1
 authors: ["AniSkywalker", "Willy"]
 main: me.meyerzinn.buildbattle.BuildBattle
-
+depend: ["MVdWPlaceholderAPI", "PlotSquared"]
 commands:
   bbjoin:
     description: Join the current build battle.

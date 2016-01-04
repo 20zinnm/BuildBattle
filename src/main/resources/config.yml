@@ -11,3 +11,8 @@ lang:
   no-game: "&cThere is no game to join!"
   joined: "&aYou joined BuildBattle with plot &c%plot%&a!"
   joined-broadcast: "&a%player% joined BuildBattle with plot &c%plot%&a!"
+  joining: "&aBuildBattle has started! Join with /bbjoin!"
+  building: "&aThose participating in BuildBattle may now build!"
+  no-block-break: "&cIt is not the BUILDING stage, so you can't build."
+  no-block-place: "&cIt is not the BUILDING stage, so you can't build."
+  no-move: "&cYou can't teleport until the BUILDING stage!"

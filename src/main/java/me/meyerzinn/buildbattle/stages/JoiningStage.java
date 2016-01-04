@@ -10,7 +10,7 @@ public class JoiningStage implements Stage {
 	/**
 	 * @return Stage
 	 */
-	public Stage beginStage(final Game game) {
+	public void beginStage(final Game game) {
 		game.setGameStatus(GameStatus.JOINING);
 		Bukkit.broadcastMessage(
 				ChatColor.translateAlternateColorCodes('&', game.getPlugin().getConfig().getString("lang.joining")));
@@ -18,8 +18,7 @@ public class JoiningStage implements Stage {
 			public void run() {
 				game.next();
 			}
-		}, game.getGameConfig().getJoinTime() * 20);
-		return this;
+		}, (game.getGameConfig().getJoinTime() / 1000) * 20);
 	}
 
 }
