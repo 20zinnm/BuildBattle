@@ -1,2 +1,4 @@
 language: java
 sudo: required
+notifications:
+  slack: xpcraft:hwbT6gO8Avy44TSC1IeJB1mh
