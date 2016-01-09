@@ -12,5 +12,6 @@
 /Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/commands/StartCommand.java
 /Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/status/GameStatus.java
 /Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/stages/JudgingStage.java
+/Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/commands/VoteCmd.java
 /Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/status/AddPlayerStatus.java
 /Users/meyerzinn/Documents/workspace/BuildBattle/src/main/java/me/meyerzinn/buildbattle/utils/IconMenu.java

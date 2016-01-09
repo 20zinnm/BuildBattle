@@ -1,4 +1,5 @@
 me/meyerzinn/buildbattle/commands/JoinCmd$1.class
+me/meyerzinn/buildbattle/commands/VoteCmd.class
 me/meyerzinn/buildbattle/stages/JoiningStage.class
 me/meyerzinn/buildbattle/stages/JoiningStage$1.class
 me/meyerzinn/buildbattle/commands/StartCommand.class
