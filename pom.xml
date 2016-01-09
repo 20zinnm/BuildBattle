@@ -16,6 +16,10 @@
 			<name>MVdW Public Repositories</name>
 			<url>http://repo.mvdw-software.be/content/groups/public/</url>
 		</repository>
+		<repository>
+			<id>com.intellectualcrafters</id>
+			<url>file://${basedir}/repo</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
