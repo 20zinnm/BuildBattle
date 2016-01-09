@@ -32,7 +32,7 @@ public class Game {
 	 * DEFINE RUNTIME VARIABLES
 	 */
 
-	private World world;
+	private World worl;
 	private Long timeStageStarted;
 	private GameStatus gameStatus;
 	private GameConfig gameConfig;
